@@ -136,8 +136,7 @@ class Sentence():
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
-        self.cells.remove(cell) if cell in self.cells else None
-        return None 
+        return self.cells.remove(cell) if cell in self.cells else None
 
 class MinesweeperAI():
     """

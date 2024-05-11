@@ -90,6 +90,14 @@ class Sentence():
     A sentence consists of a set of board cells,
     and a count of the number of those cells which are mines.
     """
+    # Esta clase deberia crear objetos que son definidos por sus celdas adyacentes y el conteo de minas que estos tienen, por ejemplo:
+    # Para definir el siguiente objeto 3x3:
+    #
+    #     | (1,1) | (1,2) | (1,3) |
+    #     |-----------------------|   Sentence(cells, count) donde cells sera un input de un conjunto de tuplas(como veremos mas adelante)
+    #     | (2,1) | (2,2) | (2,3) |   y count el contador de minas alrededor de la celda seleccionada. Por ejemplo: Supongamos que la celda 
+    #     |-----------------------|   celda seleccionada fue (2,2) entonces cells sera un conjunto {(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)} = count
+    #     | (3,1) | (3,2) | (3,3) |   y count seria el numero de minas alrededor de (2,2)
 
     def __init__(self, cells, count):
         self.cells = set(cells)
@@ -105,28 +113,31 @@ class Sentence():
         """
         Returns the set of all cells in self.cells known to be mines.
         """
-        raise NotImplementedError
+        return self.cells if self.count == 8 else None
 
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        raise NotImplementedError
+        return self.cells if self.count == 0 else None
 
     def mark_mine(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            self.cells.remove(cell)
+            self.count -= 1
+        return None
 
     def mark_safe(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
-        raise NotImplementedError
-
+        self.cells.remove(cell) if cell in self.cells else None
+        return None 
 
 class MinesweeperAI():
     """
@@ -182,7 +193,66 @@ class MinesweeperAI():
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
-        raise NotImplementedError
+
+        # Marcar la celda como un movimiento que ya ha sido hecho
+        
+        self.moves_made.add(cell) if cell not in self.moves_made else None
+        
+        # Marcar la celda como segura
+        
+        self.mark_safe(cell) if cell not in self.safes else None
+
+        # Añadir una nueva "sentence" al conocimiento base de la IA basado dobre el valor "cell" y "count"
+        # Para esto usaremos la clase Sentence(cells,count)
+
+        cells = set()
+        
+        for i in range( cell[0] - 1, cell[0] + 2 ):
+            for j in range( cell[1] - 1, cell[1] + 2 ):
+
+                if (i,j) == cell:
+                    continue
+                
+                if 0 <= i < self.height and 0 <= j < self.width:
+                    if (i,j) not in self.moves_made and (i,j) not in self.mines:
+                        cells.add((i,j))
+                    elif (i,j) in self.mines:
+                        count -= 1
+        nueva_sentencia = Sentence(cells,count)
+        self.knowledge.append(nueva_sentencia)
+
+        # Marcar cualquier celda adicional como segura o como mina si se puede concluir ello
+        
+        for i in self.knowledge:
+
+            # Casillas seguras
+            seguras = i.known_safes()
+            if seguras is not None:
+                segura = list(seguras)
+                for j in segura:
+                    self.mark_safe(j)
+
+            # Casillas con minas
+            minas = i.known_mines()
+            if minas is not None:
+                mina = list(minas)
+                for j in mina:
+                    self.mark_mine(j)
+
+        # Añadir una nueva "sentence" al conocimiento base de la IA si ella puede ser inferida del conocimineto existente
+
+        for sentence in self.knowledge:
+            for item in self.knowledge:
+
+                if item == sentence:
+                    continue
+
+                if item.cells.issubset(sentence.cells):
+                    new_set = sentence.cells.difference(item.cells)
+                    new_count = sentence.count - item.count
+                    new_sentence = Sentence(new_set, new_count)
+                    if new_sentence not in self.knowledge:
+                        self.knowledge.append(new_sentence)
 
     def make_safe_move(self):
         """
@@ -193,8 +263,12 @@ class MinesweeperAI():
         This function may use the knowledge in self.mines, self.safes
         and self.moves_made, but should not modify any of those values.
         """
-        raise NotImplementedError
-
+        movimientos = self.safes - self.moves_made
+        if len(movimientos) != 0:
+            for i in movimientos:
+                return i
+        return None
+       
     def make_random_move(self):
         """
         Returns a move to make on the Minesweeper board.
@@ -202,4 +276,8 @@ class MinesweeperAI():
             1) have not already been chosen, and
             2) are not known to be mines
         """
-        raise NotImplementedError
+
+        while True:
+            (i, j) = (random.randrange(self.height) , random.randrange(self.width))
+            if (i, j) not in self.moves_made and (i, j) not in self.mines:
+                return (i, j)

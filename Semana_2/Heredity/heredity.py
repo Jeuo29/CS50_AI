@@ -93,7 +93,6 @@ def main():
                 p = probabilities[person][field][value]
                 print(f"    {value}: {p:.4f}")
 
-
 def load_data(filename):
     """
     Load gene and trait data from a file into a dictionary.
@@ -184,7 +183,7 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
         probabilities[nombre]["gene"][dic[nombre]['NumeroGenes']] += p
         probabilities[nombre]["trait"][dic[nombre]['Razgo']] += p
 
-    return 
+    return  
         
 def normalize(probabilities):
     """

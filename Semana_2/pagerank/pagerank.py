@@ -66,7 +66,7 @@ def transition_model(corpus, page, damping_factor):
     N = len(corpus)
     
     for key in corpus:
-        Probabilidad_links=0
+        Probabilidad_links = 0
         Probabilidad_corpus = No_damping_factor/N
 
         if key in corpus[page]:

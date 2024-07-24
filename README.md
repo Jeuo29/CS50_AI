@@ -21,7 +21,7 @@ En este proyecto nos interesa implementar el juego Six Degrees of Kevin Bacon. E
 
 En este proyecto nos interesa implementar el juego Tic Tac toe. Este es un juego divertido en una cuadrícula de 3x3, donde los jugadores toman turnos marcando los espacios con X o O en un intento de obtener tres en una fila, ya sea horizontal, vertical o diagonalmente. El objetivo del juego es conseguir tres X u O seguidas antes que tu oponente. Aquí nuestro trabajo sera completar 7 funciones que representan diversas facetas del juego, donde la principal función es la implementación del algoritmo minimax que sera aquella que le permita al programa calcular el mejor posible movimiento. El algoritmo requerido para la implementación del código es el siguiente:
 
-![MinMax](https://github.com/user-attachments/assets/f5045fe2-3160-46f7-9f07-3f6dbc181fb2)
+![MinMax](https://github.com/user-attachments/assets/f31a0293-8dc8-4c47-b933-7ecb0f80f434)
 
 ## Semana 1: Conocimiento  
 

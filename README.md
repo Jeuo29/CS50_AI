@@ -1,4 +1,3 @@
-![BFS](https://github.com/user-attachments/assets/9bb539d5-b511-4720-a3b7-8acd31aa65ba)
 # *CS50's* Introducción a la Inteligencia Artificial con python 
 
 En el siguiente curso nos vamos a introducir, explorar y comprender los conceptos y algoritmos que constituyen la base de lo que hoy en dia conocemos como inteligencia artificial. El curso se encuentra dividido en siete semanas, donde en cada una de ellas se introduce y explora lo básico de cada una de las grandes areas que comprende la inteligencia artificial. 
@@ -15,14 +14,14 @@ A continuación se presenta una introducción a los proyectos:
 
 En este proyecto nos interesa implementar el juego Six Degrees of Kevin Bacon. Este es un juego divertido en el que conectas a dos actores cualquiera a través de sus papeles cinematográficos. El objetivo es completar este proceso en el menor número de pasos posible. Aquí nuestro trabajo sera completar la función shortest_path que es una implementación del algoritmo de búsqueda en anchura que se ve a continuación: 
 
-![hola mundo](BFS.png)
+![BFS](https://github.com/user-attachments/assets/9bb539d5-b511-4720-a3b7-8acd31aa65ba)
 
 
 ### **Proyecto 2**: TicTacToe
 
 En este proyecto nos interesa implementar el juego Tic Tac toe. Este es un juego divertido en una cuadrícula de 3x3, donde los jugadores toman turnos marcando los espacios con X o O en un intento de obtener tres en una fila, ya sea horizontal, vertical o diagonalmente. El objetivo del juego es conseguir tres X u O seguidas antes que tu oponente. Aquí nuestro trabajo sera completar 7 funciones que representan diversas facetas del juego, donde la principal función es la implementación del algoritmo minimax que sera aquella que le permita al programa calcular el mejor posible movimiento. El algoritmo requerido para la implementación del código es el siguiente:
 
-![hola mundo](MinMax.png)
+![MinMax](https://github.com/user-attachments/assets/f5045fe2-3160-46f7-9f07-3f6dbc181fb2)
 
 ## Semana 1: Conocimiento  
 

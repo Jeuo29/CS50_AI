@@ -1,3 +1,4 @@
+![BFS](https://github.com/user-attachments/assets/9bb539d5-b511-4720-a3b7-8acd31aa65ba)
 # *CS50's* Introducción a la Inteligencia Artificial con python 
 
 En el siguiente curso nos vamos a introducir, explorar y comprender los conceptos y algoritmos que constituyen la base de lo que hoy en dia conocemos como inteligencia artificial. El curso se encuentra dividido en siete semanas, donde en cada una de ellas se introduce y explora lo básico de cada una de las grandes areas que comprende la inteligencia artificial. 

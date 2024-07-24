@@ -14,18 +14,18 @@ CKnave = Symbol("C is a Knave")    # C is a knave
 
 knowledge0 = And(
     Or( And(AKnight, Not(AKnave)) , And(AKnave,Not(AKnight)) ), # Ley de la disyuncion exclusiva, esto ya que A es un caballero o un villano, pero no puede ser ambos 
-    Implication( AKnave , Not(And(AKnight,AKnave)) ),  # Si A es un villano entonces la premisa es falsa porque todo lo que dice un villano es falso, por lo tanto If Aknave=true --> Not(False)=True
-    Implication( AKnight , And(AKnight,AKnave) )       # Pero si A es un caballero entonces la premisa es verdadera porque todo lo que dice un caballero es verdad, por lo tanto If Aknight=true --> True
+    Implication( AKnave , Not(And(AKnight,AKnave)) ), # Si A es un villano(Aknave is true) entonces la Premisa es falsa porque todo lo que dice un villano es falso, por lo tanto If Aknave is true --> Not(Premisa) 
+    Implication( AKnight , And(AKnight,AKnave) ) # Si A es un caballero(Aknight is true) entonces la premisa es verdadera porque todo lo que dice un caballero es verdad, por lo tanto If Aknight is true --> Premisa
 )
 
 # Puzzle 1
-# A says "We are both knaves." ------------------------------------> Premisa= And(AKnave,BKnave)
+# A says "We are both knaves." ------------------------------------> Premisa = And(AKnave,BKnave)
 # B says nothing.
 
 knowledge1 = And(
     Or( And(AKnight, Not(AKnave)) , And(AKnave,Not(AKnight)) ), # Ley de la disyuncion exclusiva, esto ya que A es un caballero o un villano, pero no puede ser ambos 
-    Implication( AKnave, Not(And(AKnave,BKnave)) ),   # Si A es un villano entonces la premisa es falsa, por lo tanto esta linea seria verdadera 
-    Implication( AKnight, And(AKnight,AKnave) ),      # Pero si A es un caballero entonces la premisa es verdadera, por lo tanto esta linea seria verdadera
+    Implication( AKnave, Not(And(AKnave,BKnave)) ), # Si A es un villano(Aknave is true) entonces la premisa es falsa, por lo tanto Aknave is true --> Not(Premisa)
+    Implication( AKnight, And(AKnight,AKnave) ), # Si A es un caballero(Aknight is true) entonces la premisa es verdadera, por lo tanto Aknight is true --> Premisa
 
     Or( And(BKnight, Not(BKnave)) , And(BKnave,Not(BKnight)) ), # Ley de la disyuncion exclusiva, esto ya que B es un caballero o un villano, pero no puede ser ambos 
                                                                 # Si B no dice nada y la premisa de A es falsa, entonces B es un caballero 
@@ -37,12 +37,12 @@ knowledge1 = And(
 
 knowledge2 = And(
     Or( And(AKnight, Not(AKnave)) , And(AKnave,Not(AKnight)) ), # Ley de la disyuncion exclusiva, esto ya que A es un caballero o un villano, pero no puede ser ambos 
-    Implication( AKnave, Not(Or( And(AKnight,BKnight), And(AKnave,BKnave))) ),   # Si A es un villano entonces la premisa es falsa, por lo tanto esta linea seria verdadera 
-    Implication( AKnight, Or( And(AKnight,BKnight), And(AKnave,BKnave)) ),      # Pero si A es un caballero entonces la premisa es verdadera, por lo tanto esta linea seria verdadera
+    Implication( AKnave, Not(Or( And(AKnight,BKnight), And(AKnave,BKnave))) ), # Si A es un villano(Aknave is true) entonces la premisa es falsa, por lo tanto Aknave is true --> Not(Premisa A)
+    Implication( AKnight, Or( And(AKnight,BKnight), And(AKnave,BKnave)) ), # Si A es un caballero(Aknight is true) entonces la premisa es verdadera, por lo tanto Aknight is true --> Premisa A
 
     Or( And(BKnight, Not(BKnave)) , And(BKnave,Not(BKnight)) ), # Ley de la disyuncion exclusiva, esto ya que B es un caballero o un villano, pero no puede ser ambos 
-    Implication( BKnave, Not(Or( And(AKnight,BKnave), And(AKnave,BKnight))) ),   # Si B es un villano entonces la premisa es falsa, por lo tanto esta linea seria verdadera 
-    Implication( BKnight, Or( And(AKnight,BKnave), And(AKnave,BKnight)) ),      # Pero si B es un caballero entonces la premisa es verdadera, por lo tanto esta linea seria verdadera
+    Implication( BKnave, Not(Or( And(AKnight,BKnave), And(AKnave,BKnight))) ), # Si B es un villano(Bknave is true) entonces la premisa es falsa, por lo tanto Bknave is true --> Not(premisa B)
+    Implication( BKnight, Or( And(AKnight,BKnave), And(AKnave,BKnight)) ), # Si B es un caballero(Bknight is true) entonces la premisa es verdadera, por lo tanto Bknight is true --> Premisa B
 )
 
 # Puzzle 3
@@ -53,20 +53,19 @@ knowledge2 = And(
 
 knowledge3 = And(
    Or( And(AKnight, Not(AKnave)) , And(AKnave,Not(AKnight)) ), # Ley de la disyuncion exclusiva, esto ya que A es un caballero o un villano, pero no puede ser ambos 
-   Implication( AKnave, Not(Or(AKnight,AKnave)) ),   # Si A es un villano entonces la premisa siempre es falsa, por lo tanto esta linea seria verdadera 
-   Implication( AKnight, Or(AKnight,AKnave) ),       # Si A es un caballero entonces la premisa siempre es verdadera, por lo tanto esta linea seria verdadera 
+   Implication( AKnave, Not(Or(AKnight,AKnave)) ), # Si A es un villano(Aknave is true) entonces la premisa siempre es falsa, por lo tanto If Aknave is true --> Not(Premisa A) 
+   Implication( AKnight, Or(AKnight,AKnave) ), # Si A es un caballero(Aknight is true) entonces la premisa siempre es verdadera, por lo tanto If Aknight is true --> Premisa A 
 
    Or( And(BKnight, Not(BKnave)) , And(BKnave,Not(BKnight)) ), # Ley de la disyuncion exclusiva, esto ya que B es un caballero o un villano, pero no puede ser ambos 
-   Implication( BKnave, Not(Or(Not(AKnight),AKnave)) ),   # Si B es un villano entonces la premisa siempre es falsa, por lo tanto esta linea seria verdadera 
-   Implication( BKnight, Or(Not(AKnight),AKnave) ),       # Si B es un caballero entonces la premisa siempre es verdadera, por lo tanto esta linea seria verdadera 
-   Implication(BKnave, Not(CKnave)),   # Si B es un villano entonces las premisa siempre es falsa, por lo tanto esta linea seria verdadera
-   Implication(BKnight, CKnave),   # Si B es un caballero entonces las premisa siempre es verdadera, por lo tanto esta linea seria verdadera
+   Implication( BKnave, Not(Or(Not(AKnight),AKnave)) ), # Si B es un villano(Bknave is true) entonces la premisa siempre es falsa, por lo tanto If Bknave is true --> Not(1er Premisa B)
+   Implication( BKnight, Or(Not(AKnight),AKnave) ), # Si B es un caballero(Bknight is true) entonces la premisa siempre es verdadera, por lo tanto If Bknight is true --> 1er Premisa B
+   Implication(BKnave, Not(CKnave)), # Si B es un villano(Bknave is true) entonces la premisa siempre es falsa, por lo tanto If Bknave is true --> Not(2da Premisa B)
+   Implication(BKnight, CKnave), # Si B es un caballero(Bknight is true) entonces la premisa siempre es verdadera, por lo tanto If Bknight is true --> 2da Premisa B
 
    Or( And(CKnight, Not(CKnave)) , And(CKnave,Not(CKnight)) ), # Ley de la disyuncion exclusiva, esto ya que C es un caballero o un villano, pero no puede ser ambos 
-   Implication( CKnave, Not(AKnight) ),   # Si C es un villano entonces la premisa es falsa, por lo tanto esta linea seria verdadera 
-   Implication( CKnight, AKnight )        # Si C es un caballero entonces la premisa es verdadera, por lo tanto esta linea seria verdadera
+   Implication( CKnave, Not(AKnight) ), # Si C es un villano(Cknave is true) entonces la premisa es falsa, por lo tanto If Cknave is true --> Not(Premisa C)
+   Implication( CKnight, AKnight ) # Si C es un caballero(Cknight is true) entonces la premisa es verdadera, por lo tanto If Cknight is true --> Premisa C
 )
-
 
 def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
@@ -84,7 +83,6 @@ def main():
             for symbol in symbols:
                 if model_check(knowledge, symbol):
                     print(f"    {symbol}")
-
 
 if __name__ == "__main__":
     main()

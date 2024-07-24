@@ -1,12 +1,10 @@
 import itertools
 import random
 
-
 class Minesweeper():
     """
     Minesweeper game representation
     """
-
     def __init__(self, height=8, width=8, mines=8):
 
         # Set initial width, height, and number of mines
@@ -83,7 +81,6 @@ class Minesweeper():
         """
         return self.mines_found == self.mines
 
-
 class Sentence():
     """
     Logical statement about a Minesweeper game
@@ -96,7 +93,7 @@ class Sentence():
     #     | (1,1) | (1,2) | (1,3) |
     #     |-----------------------|   Sentence(cells, count) donde cells sera un input de un conjunto de tuplas(como veremos mas adelante)
     #     | (2,1) | (2,2) | (2,3) |   y count el contador de minas alrededor de la celda seleccionada. Por ejemplo: Supongamos que la celda 
-    #     |-----------------------|   celda seleccionada fue (2,2) entonces cells sera un conjunto {(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)} = count
+    #     |-----------------------|   celda seleccionada fue (2,2) entonces cells sera un conjunto {(1,1),(1,2),(1,3),(2,1),(2,3),(3,1),(3,2),(3,3)}
     #     | (3,1) | (3,2) | (3,3) |   y count seria el numero de minas alrededor de (2,2)
 
     def __init__(self, cells, count):
@@ -113,12 +110,16 @@ class Sentence():
         """
         Returns the set of all cells in self.cells known to be mines.
         """
+        ## La única forma de saber con certeza donde están todas las minas es si recibimos la información previa de que el
+        ## el conteo de minas alrededor de una celda es igual a ocho.
         return self.cells if self.count == 8 else None
 
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
+        ## La única forma de saber con certeza que todas las celdas aledañas son seguras es si recibimos la información previa
+        ## de que el conteo de minas alrededor de una celda es igual a cero.
         return self.cells if self.count == 0 else None
 
     def mark_mine(self, cell):
@@ -126,6 +127,9 @@ class Sentence():
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
+        ## Se debe comprobar que la celda introducida que sabemos que es una mina pertenezca al conjunto de todas las celdas aledañas.
+        ## Si pertenece entonces debemos actualizar el conjunto de todas las celdas aledañas removiendo esa celda conocida como mina y
+        ## reduciendo el conteo de minas totales en el tablero. Si no pertenece entonces devuelve None.
         if cell in self.cells:
             self.cells.remove(cell)
             self.count -= 1
@@ -136,13 +140,15 @@ class Sentence():
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
+        ## Se debe comprobar que la celda introducida que sabemos que es segura pertenezca al conjunto de todas las celdas aledañas.
+        ## Si pertenece entonces debemos actualizar el conjunto de todas las celdas aledañas removiendo esa celda conocida como segura.
+        ## Si no pertenece entonces devuelve None.
         return self.cells.remove(cell) if cell in self.cells else None
 
 class MinesweeperAI():
     """
     Minesweeper game player
     """
-
     def __init__(self, height=8, width=8):
 
         # Set initial height and width
@@ -193,16 +199,26 @@ class MinesweeperAI():
                if they can be inferred from existing knowledge
         """
 
-        # Marcar la celda como un movimiento que ya ha sido hecho
+        ## Si el movimiento no ha sido hecho, o sea que la celda no se encuentra en el conjunto de movimientos hechos 
+        ## vamos a agregar la celda que sabemos que es segura al conjunto de movimientos hechos, si la celda se encuentra en
+        ## el conjunto de movimientos hechos entonces devolveremos None.
         
         self.moves_made.add(cell) if cell not in self.moves_made else None
         
-        # Marcar la celda como segura
+        ## Si el movimiento no ha sido marcado como seguro, o sea que la celda no se encuentra en el conjunto de movimientos seguros 
+        ## vamos a agregar la celda que sabemos que es segura al conjunto de movimientos seguros, si la celda se encuentra en
+        ## el conjunto de movimientos seguros entonces devolveremos None.
         
         self.mark_safe(cell) if cell not in self.safes else None
 
-        # Añadir una nueva "sentence" al conocimiento base de la IA basado dobre el valor "cell" y "count"
-        # Para esto usaremos la clase Sentence(cells,count)
+        ## Para este paso vamos a crear un conjunto vació donde guardaremos todas las posibles celdas jugables, para ello
+        ## se va a recorrer todas las celdas aledañas a la celda (i,j)-esima introducida y estas celdas se agregaran al
+        ## conjunto de acuerdo a algunos requerimientos como:
+        ## 1) Que las celdas estén dentro del tablero de juego.
+        ## 2) Que las celdas no se encuentren en el conjunto de movimientos hechos ni en el conjunto de minas.
+        ## Si se cumplen ambos requerimientos entonces la celda (i,j)-esima se agregara al conjunto, pero ademas
+        ## de hallar alguna celda que pertenece al conjunto de las minas se reducirá el contador de minas conocidas.
+        ## Luego con toda esta informacion previa podemos crear "Sentence" que añadiremos al conocimiento 
 
         cells = set()
         
@@ -220,7 +236,8 @@ class MinesweeperAI():
         nueva_sentencia = Sentence(cells,count)
         self.knowledge.append(nueva_sentencia)
 
-        # Marcar cualquier celda adicional como segura o como mina si se puede concluir ello
+        ## Marcar cualquier celda adicional como segura o como mina si se puede concluir ello a traves de la lista de 
+        ## conocimiento y las funciones antes creadas para ello.
         
         for i in self.knowledge:
 
@@ -262,6 +279,9 @@ class MinesweeperAI():
         This function may use the knowledge in self.mines, self.safes
         and self.moves_made, but should not modify any of those values.
         """
+        ## Para retornar una celda segura primero debemos crear un conjunto que contenga todas estas celdas.
+        ## Usando la diferencia de conjuntos podemos hallar este conjunto muy fácilmente y luego solo queda 
+        ## comprobar que dicho conjunto no sea vació para devolver algún valor(celda) de este, sino solo se devuelve None
         movimientos = self.safes - self.moves_made
         if len(movimientos) != 0:
             for i in movimientos:
@@ -275,7 +295,10 @@ class MinesweeperAI():
             1) have not already been chosen, and
             2) are not known to be mines
         """
-
+        ## Si ninguna celda es segura, o sea make_safe_move() devuelve None, entonces se elegirá alguna celda aleatoria.
+        ## Esta celda aleatoria debe cumplir:
+        ## 1) La celda resultante debe estar dentro de las dimensiones del tableros 
+        ## 2) La celda no debe estar dentro del conjunto de movimientos ya hechos, ni dentro del conjunto de las minas 
         while True:
             (i, j) = (random.randrange(self.height) , random.randrange(self.width))
             if (i, j) not in self.moves_made and (i, j) not in self.mines:

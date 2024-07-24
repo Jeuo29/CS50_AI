@@ -18,25 +18,31 @@ def initial_state():
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]]
 
+## La siguiente función determina de quien es el turno dado un tablero, teniendo en cuenta que siempre juegan primero la X.
 
 def player(board):
     """
     Returns player who has the next turn on a board.
     """
-    # Iniciamos un contador que determinará el numero de espacios vacios en el tablero
-    contador=0
+    ## La función toma como parámetro un tablero. Se inicia un contador que determinará 
+    ## el numero de espacios vacíos en el tablero. Si el contador es un numero impar la función 
+    ## devolverá X sino devolverá O.
+    contador = 0
     for fila in board:
         for casilla in fila:
             if casilla is None:
                 contador += 1
-    juega= X if contador % 2 != 0 else O
+    juega = X if contador % 2 != 0 else O
     return juega
 
+## La siguiente función determinara todos los posibles movimientos que sean validos dado un tablero
 
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
+    ## La función toma como parámetro un tablero. Se crea un conjunto vació donde se guardaran los resultados y
+    ## se recorre todo el tablero buscando casillas vacías y si se encuentran se agregan al conjunto.
     conjunto=set()
     row=0
     for fila in board:
@@ -48,11 +54,16 @@ def actions(board):
         row += 1
     return conjunto
 
+## La siguiente función determina un nuevo tablero luego de que se realiza una acción sobre el anterior
 
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
+    ## La función toma como parámetros un tablero y una acción (i,j)-esima, si no es posible realizar la acción
+    ## por no pertenecer al conjunto de acciones posibles, entonces se toma como movimiento no valido. De no ser asi,
+    ## se crea una copia para operar con ella, se determina de quien es el turno y por ultimo según de quien fuera el turno se 
+    ## reemplaza una X o un O en el (i,j)-esimo espacio.
     if action not in actions(board):
          raise NameError('No puede realizar ese movimiento, casilla ocupada')
     else:
@@ -62,12 +73,15 @@ def result(board, action):
         new_board[row][colum]=turno
     return new_board
 
+## La siguiente función determina si hay un ganador 
 
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    if True:
+    ## La función toma como parámetro un tablero, recorre todas las filas, columnas y diagonales. Si existe alguna que tenga 
+    ## en todas los mismos elementos devuelve que el ganador es ese elemento. Si no hay ganador retorna None. 
+    if actions(board) != set():
         for row in board:
             if row == [X,X,X] or row == [O,O,O]:
                 return row[0]
@@ -91,11 +105,15 @@ def winner(board):
     else:
         return None
 
+## Es una función que determina si el juego ha acabado
 
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+    ## La función toma como parámetro un tablero, recorre todo el tablero contando las casillas vacías
+    ## si no hay casillas vacías o Hay un ganador, entonces el juego ha acabado, si no ocurre ninguna de 
+    ## estas entonces el juego no ha acabado.
     contador=0
     for row in board:
         for col in row:
@@ -109,11 +127,14 @@ def terminal(board):
     else:
         return False
 
+## Esta función asigna un numero dependiendo de quien haya ganado el juego
 
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
+    ## Asigna el numero 1 si "X" gana el juego, asigna el numero -1 si "O" gana el juego y
+    ## asigna el numero 0 si ninguno gana.
     if winner(board) == X:
         return 1
     elif winner(board) == O:
@@ -121,6 +142,7 @@ def utility(board):
     else:
         return 0
 
+## Esta función es la implementación del algoritmo minimax que se muestra en el archivo README.md
 
 def minimax(board):
     """

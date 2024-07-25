@@ -123,7 +123,7 @@ $$P(\Omega)= 1$$
 
 $$P(A)>0\ \ \ \forall A\ \epsilon\ \sigma-algebra\ sucesos $$
 
-3) Si ${S_n}_{n\epsilon N}$ son eventos mutuamente excluyentes entonces:
+3) Si $\{S_n \}_{n\epsilon N}$ son eventos mutuamente excluyentes entonces:
 
 $$P(U_{n=1}^\infty S_n) = \sum_{n=1}^{\infty}P(S_n)$$
 

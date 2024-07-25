@@ -116,10 +116,15 @@ Es claro que la probabilidad es la medida que cuantifica la incertidumbre asocia
 Estas deben cumplir algunos axiomas:
 
 1) La probabilidad del suceso seguro es 1:
+
 $$P(\Omega)= 1$$
+
 2) La probabilidad de cualquier suceso *A* es no negativa
+
 $$P(A)>0\ \ \ \forall A\ \epsilon\ \sigma-algebra\ sucesos $$
+
 3) Si $\{S_n\}_{n\epsilon N}$ son eventos mutuamente excluyentes entonces:
+
 $$P(U_{n=1}^\infty S_n) = \sum_{n=1}^{\infty}P(S_n)$$
 
 Ademas otros conceptos de vital importancia son:

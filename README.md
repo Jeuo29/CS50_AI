@@ -109,7 +109,7 @@ A veces podemos toparnos en ocasiones no favorables, donde los dos temas anterio
 
 El objetivo en esta sección es construir agentes que bajo condiciones de observación parcial, eventos aleatorios o adversidades, sea capaz de manejar la incertidumbre y llevar a cabo sus tareas de la mejor forma posible. Para todo esto vamos a usar la probabilidad, pero ¿Que es la probabilidad? Bueno, para esto debemos saber que en la vida cotidiana generalmente existen dos tipos de fenómenos:
 
-1) Los fenómenos deterministas: Son aquellos que no importa cuantas veces repitas un experimento sobre ellos siempre arrojan los mismos resultados. Ejemplo: EL punto de ebullición del agua 
+1) Los fenómenos deterministas: Son aquellos que no importa cuantas veces repitas un experimento sobre ellos siempre arrojan los mismos resultados. Ejemplo: El punto de ebullición del agua 
 2) Los fenómenos aleatorios: Son aquellos que no importa cuantas veces repitas un experimento sobre ellos siempre arrojan un resultado distinto. Ejemplo: Lanzamiento de un dado.
 
 Es claro que la probabilidad es la medida que cuantifica la incertidumbre asociada a la ocurrencia de algún evento o fenómeno de interés.
@@ -123,7 +123,7 @@ $$P(\Omega)= 1$$
 
 $$P(A)>0\ \ \ \forall A\ \epsilon\ \sigma-algebra\ sucesos $$
 
-3) Si $\{S_n\}_{n\epsilon N}$ son eventos mutuamente excluyentes entonces:
+3) Si ${S_n}_{n\epsilon N}$ son eventos mutuamente excluyentes entonces:
 
 $$P(U_{n=1}^\infty S_n) = \sum_{n=1}^{\infty}P(S_n)$$
 
@@ -136,6 +136,7 @@ $$(\Omega,F, P) \rightarrow (ℝ,B(ℝ), P_x)$$
 2) Probabilidad Condicional: es la probabilidad de que ocurra un evento, dado que otro evento ya ha ocurrido, o sea es la probabilidad de que algo suceda, considerando que algo más ya ha sucedido. La formula viene dada por:
 
 $$P(Y|X=x) = \frac{P(Y=y , X=x)}{P(X=x)}$$
+
 $$P(Y=y, X=x)=P(X=x)P(Y|X=x)\ \ \ product\ rule$$ 
 
 3) Probabilidad conjunta: es la probabilidad que nos permite calcular la probabilidad de que dos o más eventos ocurran al mismo tiempo. Es decir, mide la posibilidad de que se intercepten o coincidan múltiples eventos. Si los eventos son independientes su calculo viene dado por:
@@ -154,6 +155,7 @@ $$P(Y=y, X=x)=P(Y=y)P(X|Y=y)$$
 Igualando:
 
 $$P(X=x)P(Y|X=x)=P(Y=y)P(X|Y=y)$$
+
 $$P(X|Y=y)=\frac{P(X=x)P(Y|X=x)}{P(Y=y)}$$
 
 ### **Proyecto 1**: PageRank

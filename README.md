@@ -1,6 +1,6 @@
 # *CS50's* Introducción a la Inteligencia Artificial con python 
 
-En el siguiente curso nos vamos a introducir, explorar y comprender los conceptos y algoritmos que constituyen la base de lo que hoy en dia conocemos como inteligencia artificial. El curso se encuentra dividido en siete semanas, donde en cada una de ellas se introduce y explora lo básico de cada una de las grandes areas que comprende la inteligencia artificial. 
+En el siguiente curso vamos a introducir, explorar y comprender los conceptos y algoritmos que constituyen la base de lo que hoy en dia conocemos como inteligencia artificial. El curso se encuentra dividido en siete semanas, donde en cada una de ellas se introduce y explora lo básico de cada una de las grandes areas que comprende la inteligencia artificial. 
 
 El objetivo principal sera la completa comprensión de los algoritmos y el problema que se presenta, esto acompañado del desafió de implementar todo correctamente en python.  
 
